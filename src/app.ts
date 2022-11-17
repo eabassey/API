@@ -24,5 +24,5 @@ Object.values(routes).forEach(routeFn => routeFn(app,appDataSource));
 
 
 app.listen(3000, () => {
-
+ console.log('TODO API Listening on port 3000')
 });

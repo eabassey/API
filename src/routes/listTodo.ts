@@ -5,6 +5,7 @@ import { Todo } from '../entity/todo.entity';
 /**
  * An endpoint for getting a list of todo items
  * @param app Express application instance
+ * @param dataSource Access to connected DB
  */
 export const listTodos = (app: Express, dataSource: DataSource) => {
     //
