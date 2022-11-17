@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm"
 import { Todo } from "./entity/todo.entity"
+import { User } from "./entity/user.entity"
 
 export const appDataSource = new DataSource({
     type: "postgres",
@@ -8,7 +9,7 @@ export const appDataSource = new DataSource({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: "postgres",
-    entities: [Todo],
+    entities: [Todo, User],
     logging: true,
     synchronize: true,
 })
