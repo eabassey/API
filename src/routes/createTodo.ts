@@ -11,10 +11,9 @@ export const createTodo = (app: Express, dataSource: DataSource) => {
     //
     app.post("/api/todos", async function (req: Request, res: Response) {
         if (!req.body.title || !req.body.title.trim()) {
-            res.status(400).json({
+            return res.status(400).json({
                 error: 'You did not provide the title of the todo',
             })
-            return;
         }
 
         let todo = new Todo();

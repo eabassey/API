@@ -15,10 +15,9 @@ export const patchTodo = (app: Express, dataSource: DataSource) => {
         })
 
         if (!todo) {
-            res.status(404).json({
+            return res.status(404).json({
                 error: 'The item could not be found!',
             })
-            return;
         } else {
             dataSource.getRepository(Todo).merge(todo, req.body)
             const results = await dataSource.getRepository(Todo).save(todo)

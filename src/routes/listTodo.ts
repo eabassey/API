@@ -11,6 +11,6 @@ export const listTodos = (app: Express, dataSource: DataSource) => {
     //
     app.get("/api/todos", async function (req: Request, res: Response) {
         const todos = await dataSource.getRepository(Todo).find();
-        res.json(todos);
+        return res.json(todos);
     })
 }
