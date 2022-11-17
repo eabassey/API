@@ -1,6 +1,7 @@
 import {Request, Response, Express} from 'express';
 import { DataSource } from 'typeorm';
 import { Todo } from '../entity/todo.entity';
+import { verifyToken } from '../middlewares/verify-auth';
 
 /**
  * An endpoint for creating a todo item
@@ -9,7 +10,8 @@ import { Todo } from '../entity/todo.entity';
  */
 export const createTodo = (app: Express, dataSource: DataSource) => {
     //
-    app.post("/api/todos", async function (req: Request, res: Response) {
+    app.post("/api/todos", verifyToken(app, dataSource), async function (req: Request, res: Response) {
+        
         if (!req.body.title || !req.body.title.trim()) {
             return res.status(400).json({
                 error: 'You did not provide the title of the todo',

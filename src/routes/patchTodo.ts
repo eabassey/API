@@ -1,6 +1,7 @@
 import {Request, Response, Express} from 'express';
 import { DataSource } from 'typeorm';
 import { Todo } from '../entity/todo.entity';
+import { verifyToken } from '../middlewares/verify-auth';
 
 /**
  * An endpoint for updating a todo item
@@ -9,7 +10,7 @@ import { Todo } from '../entity/todo.entity';
  */
 export const patchTodo = (app: Express, dataSource: DataSource) => {
     //
-    app.patch("/api/todos/:id", async function (req: Request, res: Response) {
+    app.patch("/api/todos/:id", verifyToken(app, dataSource), async function (req: Request, res: Response) {
         const todo = await dataSource.getRepository(Todo).findOneBy({
             id: +req.params.id,
         })
