@@ -5,6 +5,8 @@ import * as express from 'express';
 import {Request, Response} from 'express';
 import * as routes from './routes';
 import { appDataSource } from './app-data-source';
+import * as cors from 'cors';
+
 
 
 appDataSource
@@ -18,7 +20,9 @@ appDataSource
 
 
 const app = express();
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 
 // GENERATE ROUTES

@@ -11,7 +11,18 @@ import { verifyToken } from '../middlewares/verify-auth';
 export const listTodos = (app: Express, dataSource: DataSource) => {
     //
     app.get("/api/todos", verifyToken(app, dataSource), async function (req: any, res: Response) {
-        const todos = await dataSource.getRepository(Todo).find();
+        const filterBy = req.query.filterBy;
+        let where;
+        if (filterBy === 'completed') {
+            where = { completed: true };
+        } else if (filterBy === 'incompleted') {
+            where = { completed: false };
+        } else {
+            where = {}
+        }
+        const todos = await dataSource.getRepository(Todo).find({
+            where,
+        });
         return res.json(todos);
     })
 }

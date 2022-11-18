@@ -28,6 +28,19 @@ export const signup = (app: Express, dataSource: DataSource) => {
         user.password = hashSync(password, 8);
       
         const result = await dataSource.manager.save(user);
-        return res.send(result);
+
+        const token = jwt.sign({
+            id: result.id,
+            email: result.email,
+        }, 
+        process.env.SECRET || '', {
+        });
+
+        return res.send({
+            id: result.id,
+            email: result.email,
+            name: result.name,
+            token,
+        });
     })
 }

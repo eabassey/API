@@ -12,8 +12,9 @@ import * as jwt from 'jsonwebtoken';
 export const login = (app: Express, dataSource: DataSource) => {
     //
     app.post("/api/login", async function (req: Request, res: Response) {
-        const email = req.body.email.trim();
-        const password = req.body.password.trim();
+        const email = req.body?.email?.trim();
+        const password = req.body?.password?.trim();
+        console.log({email, password});
         if (!email || !password) {
             return res.status(400).json({
                 error: 'Please provide all required information!',
@@ -48,7 +49,7 @@ export const login = (app: Express, dataSource: DataSource) => {
                 email,
             }, 
             process.env.SECRET || '', {
-            })
+            });
           
             return res.send({
                 id: user.id,
