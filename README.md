@@ -7,3 +7,6 @@ DB_HOST=xxxxx
 DB_USERNAME=xxxx
 DB_PASSWORD=xxxx
 PORT=xxxx
+
+## Start
+Run `npm start` to start app.
